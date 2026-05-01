@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:ital,wght@0,100;0,300;0,400;0,600;0,700;1,300&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cyan: #00e5ff;
+  --cyan-dim: #00b8cc;
+  --dark: #020d12;
+  --dark-2: #061820;
+  --dark-3: #0a2233;
+  --neon-gold: #ffd700;
+  --neon-pink: #ff6b9d;
+  --neon-purple: #9f7fff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--dark);
+  color: #e8f4f8;
+  font-family: 'Exo 2', sans-serif;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: rgba(0,229,255,0.3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,229,255,0.6); }
+
+/* Glassmorphism card */
+.glass-card {
+  background: rgba(6,24,32,0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0,229,255,0.12);
+}
+
+/* Neon text glow */
+.neon-text { text-shadow: 0 0 10px rgba(0,229,255,0.8), 0 0 30px rgba(0,229,255,0.4); }
+.neon-text-gold { text-shadow: 0 0 10px rgba(255,215,0,0.8), 0 0 30px rgba(255,215,0,0.4); }
+
+/* Clip path button */
+.clip-btn { clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%); }
+.clip-btn-sm { clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%); }
+.clip-card { clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)); }
+
+/* Scan line animation */
+.scan-line {
+  position: absolute;
+  left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0.4;
+  animation: scanLine 4s linear infinite;
+}
+
+@keyframes scanLine { 0%{top:-2px} 100%{top:100%} }
+
+/* Grid background */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Tier badge colors */
+.tier-standard { color: #8899aa; border-color: rgba(136,153,170,0.4); background: rgba(136,153,170,0.08); }
+.tier-epic { color: #9f7fff; border-color: rgba(159,127,255,0.4); background: rgba(159,127,255,0.08); }
+.tier-legendary { color: #ffd700; border-color: rgba(255,215,0,0.4); background: rgba(255,215,0,0.08); }
+.tier-mythic { color: #ff6b9d; border-color: rgba(255,107,157,0.4); background: rgba(255,107,157,0.08); }
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(90deg, rgba(0,229,255,0.05) 25%, rgba(0,229,255,0.1) 50%, rgba(0,229,255,0.05) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+/* Stat bar animation */
+.stat-fill { transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* Active glow */
+.active-glow { box-shadow: 0 0 20px rgba(0,229,255,0.5), inset 0 0 20px rgba(0,229,255,0.05); }
+
+/* Input styling */
+.cyber-input {
+  background: rgba(6,24,32,0.8);
+  border: 1px solid rgba(0,229,255,0.2);
+  color: #e8f4f8;
+  font-family: 'Exo 2', sans-serif;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.cyber-input:focus {
+  outline: none;
+  border-color: rgba(0,229,255,0.6);
+  box-shadow: 0 0 0 2px rgba(0,229,255,0.1);
+}
+.cyber-input::placeholder { color: rgba(74,122,138,0.7); }
+
+/* Page transition */
+.page-enter { animation: pageEnter 0.5s ease both; }
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Glass variants (used by components) */
+.glass {
+  background: rgba(6,24,32,0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.glass-light {
+  background: rgba(6,24,32,0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Noise overlay */
+.noise::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 100;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* Hexagon clip */
+.clip-hex {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* Shadow glow utilities */
+.shadow-cyan-sm { box-shadow: 0 0 10px rgba(0,229,255,0.4); }
+.shadow-cyan { box-shadow: 0 0 20px rgba(0,229,255,0.4), 0 0 60px rgba(0,229,255,0.1); }
+
+/* Font shorthand utilities */
+.font-orbitron { font-family: 'Orbitron', monospace; }
+.font-rajdhani { font-family: 'Rajdhani', sans-serif; }
+.font-exo { font-family: 'Exo 2', sans-serif; }
